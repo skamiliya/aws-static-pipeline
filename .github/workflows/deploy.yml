@@ -1,0 +1,32 @@
+name: Deploy static website 
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout code 
+      uses: actions/checkout@v4
+    - name: configure aws creds
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::848125593930:role/p250825-github-deploy
+        aws-region: ap-northeast-1
+
+    - name: verify aws identity
+      run: aws sts get-caller-identity
+
+    - name: sync file to s3
+      run: aws s3 sync ./site s3://p250825-static-site --delete
+
+    - name: invalidate cloudfront cache
+      run: aws cloudfront create-invalidation --distribution-id E1S7LBDIGIN4C9 --paths "/*"
