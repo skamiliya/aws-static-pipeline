@@ -26,7 +26,7 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::848125593930:role/p250825-github-deploy
         aws-region: ap-northeast-1
-        role-to-skip-session-tagging: true
+        role-skip-session-tagging: true
     - name: verify aws identity
       run: aws sts get-caller-identity
 
