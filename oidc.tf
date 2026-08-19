@@ -14,7 +14,7 @@ resource "aws_iam_role" "deploy" {
     Statement = [
       {
         Effect = "Allow"
-        Action = "sts:AssumeRoleWithWebIdentity"
+        Action = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
         Principal = {
           Federated = aws_iam_openid_connect_provider.default.arn
         }
