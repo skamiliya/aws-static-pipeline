@@ -21,7 +21,7 @@ resource "aws_iam_role" "deploy" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:skamiliya/aws-static-pipeline:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" = "repo:skamiliya@88530567/aws-static-pipeline@1339090695:ref:refs/heads/main"
           }
         }
       }
